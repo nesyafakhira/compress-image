@@ -1,9 +1,9 @@
 :root {
-    --tomato-main: #ff6347;       /* Warna Utama */
-    --tomato-dark: #d63031;       /* Merah Gelap */
-    --tomato-light: #ffcccb;      /* Merah Muda */
-    --tomato-bg: #fff0f0;         /* Background Web */
-    --green-leaf: #2ecc71;        /* Aksen Hijau Daun */
+    --tomato-main: #ff6347;       
+    --tomato-dark: #d63031;       
+    --tomato-light: #ffcccb;      
+    --tomato-bg: #fff0f0;         
+    --green-leaf: #2ecc71;        
     --white: #ffffff;
     --text-dark: #2d3436;
     --text-gray: #636e72;
@@ -17,7 +17,7 @@
 }
 
 body {
-    font-family: 'Poppins', 'Segoe UI', sans-serif; /* Font modern */
+    font-family: 'Poppins', 'Segoe UI', sans-serif; 
     background-color: var(--tomato-bg);
     color: var(--text-dark);
     min-height: 100vh;
@@ -43,7 +43,7 @@ body {
 .circle-2 {
     width: 400px;
     height: 400px;
-    background: radial-gradient(circle, #ffeaa7, transparent); /* Sedikit kuning */
+    background: radial-gradient(circle, #ffeaa7, transparent); 
     bottom: -100px;
     right: -100px;
 }
@@ -100,7 +100,7 @@ h1 { color: var(--tomato-dark); font-size: 2.2rem; letter-spacing: 1px; }
 
 .container {
     display: grid;
-    grid-template-columns: 350px 1fr; /* Kiri tetap, kanan sisa */
+    grid-template-columns: 350px 1fr; 
     gap: 25px;
 }
 
@@ -123,7 +123,6 @@ h1 { color: var(--tomato-dark); font-size: 2.2rem; letter-spacing: 1px; }
     border-bottom: 2px dashed var(--tomato-light);
     padding-bottom: 10px;
 }
-
 
 .upload-container { margin-bottom: 20px; }
 input[type="file"] { display: none; }
@@ -210,7 +209,7 @@ input:checked + .slider:before { transform: translateX(24px); }
 .canvas-wrapper {
     min-height: 200px; display: flex; align-items: center; justify-content: center;
     background-image: radial-gradient(#e0e0e0 1px, transparent 1px);
-    background-size: 10px 10px; /* Pola dot halus */
+    background-size: 10px 10px; 
     border-radius: 10px; overflow: hidden; margin-bottom: 10px;
 }
 
