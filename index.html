@@ -4,39 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CitraRed</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍅</text></svg>">
+
+    <link rel="icon" href="data:image/svg+xml, <svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍅</text></svg>">
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        .canvas-wrapper canvas {
+            max-width: 100%;
+            max-height: 300px;
+            width: auto;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Ornamen Background (Hiasan CSS) -->
     <div class="ornament circle-1"></div>
     <div class="ornament circle-2"></div>
     <div class="ornament leaf-1"></div>
 
     <div class="main-wrapper">
-        <!-- Header -->
+
         <header class="glass-panel">
             <div class="header-content">
                 <div class="logo-area">
                     <span class="tomato-icon">🍅</span>
                     <h1>CitraRed</h1>
                 </div>
-                <p class="subtitle">Sistem Kompresi dan Manipulasi Image Berbasis Web-Native</p>
-                <!-- <div class="team-badge">
-                    <span>Nesya Fakhira Arianti</span> • <span>Revianti Putri</span> • <span>Miftahul Fariz</span>
-                </div> -->
+                <p class="subtitle">
+                    Sistem Kompresi dan Manipulasi Image Berbasis Web-Native
+                </p>
             </div>
         </header>
 
         <div class="container">
-            <!-- PANEL KIRI: KONTROL -->
+
             <aside class="card control-panel">
                 <div class="card-header">
                     <h2>🎛️ Konfigurasi</h2>
                 </div>
 
-                <!-- 1. Upload Section -->
                 <div class="upload-container">
                     <input type="file" id="fileInput" accept="image/jpeg, image/png">
                     <label for="fileInput" class="upload-label" id="dropZone">
@@ -46,69 +55,79 @@
                     </label>
                 </div>
 
-                <!-- 2. Slider Kualitas -->
                 <div class="control-group">
                     <div class="label-row">
                         <label>Quality</label>
                         <span class="badge-value" id="valQuality">80%</span>
                     </div>
                     <input type="range" id="rangeQuality" min="10" max="100" value="80" class="tomato-slider">
-                    <small class="theory-text">atur kualitas untuk Mengurangi redundansi psikovisual (Lossy).</small>
+                    <small class="theory-text">
+                        atur kualitas untuk Mengurangi redundansi psikovisual (Lossy).
+                    </small>
                 </div>
 
-                <!-- 3. Slider Skala -->
                 <div class="control-group">
                     <div class="label-row">
                         <label>Resize</label>
                         <span class="badge-value" id="valScale">100%</span>
                     </div>
                     <input type="range" id="rangeScale" min="10" max="100" value="100" class="tomato-slider">
-                    <small class="theory-text">Reduksi resolusi spasial (Spatial).</small>
+                    <small class="theory-text">
+                        Reduksi resolusi spasial (Spatial).
+                    </small>
                 </div>
 
-                <!-- 4. Toggle Grayscale -->
                 <div class="control-group toggle-group">
                     <label class="switch">
                         <input type="checkbox" id="checkGray">
                         <span class="slider round"></span>
                     </label>
-                    <span class="toggle-label">Mode Grayscale (Hitam Putih)</span>
+                    <span class="toggle-label">
+                        Mode Grayscale (Hitam Putih)
+                    </span>
                 </div>
 
-                <button id="btnProcess" class="btn-primary">⚡ Proses Kompresi</button>
+                <button id="btnProcess" class="btn-primary">
+                    ⚡ Proses Kompresi
+                </button>
             </aside>
 
-            <!-- PANEL KANAN: PREVIEW -->
             <main class="card preview-panel">
                 <div class="card-header">
                     <h2>Hasil Kompresi dan Resize</h2>
                 </div>
 
                 <div class="preview-grid">
-                    <!-- Original Image -->
+
                     <div class="img-box">
                         <div class="box-label">Original</div>
                         <div class="canvas-wrapper">
                             <img id="imgOriginal" alt="Belum ada gambar">
-                            <div id="emptyOriginal" class="empty-state">Menunggu Upload...</div>
+                            <div id="emptyOriginal" class="empty-state">
+                                Menunggu Upload...
+                            </div>
                         </div>
                         <div class="stats" id="statsOriginal">
                             Size: - | Dimensi: -
                         </div>
                     </div>
 
-                    <!-- Result Image -->
                     <div class="img-box">
                         <div class="box-label highlight">Hasil Kompresi</div>
                         <div class="canvas-wrapper">
                             <img id="imgResult" alt="Hasil proses">
-                            <div id="emptyResult" class="empty-state">Klik "Proses Kompresi"</div>
+                            <div id="emptyResult" class="empty-state">
+                                Klik "Proses Kompresi"
+                            </div>
                         </div>
                         <div class="stats" id="statsResult">
                             Size: - | Dimensi: -
                         </div>
-                        <div class="savings-badge" id="savingsBadge" style="display:none;">Hemat 0%</div>
+                        <div class="savings-badge" id="savingsBadge" style="display:none;">
+                            Hemat 0%
+                        </div>
                     </div>
+
                 </div>
 
                 <a id="btnDownload" class="btn-download disabled">Download</a>
@@ -118,171 +137,9 @@
         <footer>
             &copy; 2025 Tugas Besar Sistem Multimedia - Telkom University Jakarta
         </footer>
+
     </div>
 
-    <script>
-        // --- INISIALISASI ELEMEN ---
-        const fileInput = document.getElementById('fileInput');
-        const dropZone = document.getElementById('dropZone');
-        const rangeQuality = document.getElementById('rangeQuality');
-        const rangeScale = document.getElementById('rangeScale');
-        const checkGray = document.getElementById('checkGray');
-        const btnProcess = document.getElementById('btnProcess');
-        const btnDownload = document.getElementById('btnDownload');
-
-        // Elemen Display Nilai
-        const valQuality = document.getElementById('valQuality');
-        const valScale = document.getElementById('valScale');
-
-        // Variabel Global untuk menyimpan gambar
-        let originalImage = null;
-
-        // --- EVENT LISTENERS (INTERAKSI USER) ---
-
-        // 1. Update nilai slider saat digeser
-        rangeQuality.addEventListener('input', (e) => valQuality.innerText = e.target.value + '%');
-        rangeScale.addEventListener('input', (e) => valScale.innerText = e.target.value + '%');
-
-        // 2. Handle Upload File
-        fileInput.addEventListener('change', handleFileSelect);
-
-        // 3. Tombol Proses
-        btnProcess.addEventListener('click', processImage);
-
-        // --- FUNGSI UTAMA ---
-
-        function handleFileSelect(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-
-            // Validasi tipe file (hanya gambar)
-            if (!file.type.match('image.*')) {
-                alert('Mohon pilih file gambar (JPG atau PNG)!');
-                return;
-            }
-
-            const reader = new FileReader();
-            
-            // Saat file selesai dibaca
-            reader.onload = function(event) {
-                originalImage = new Image();
-                originalImage.src = event.target.result;
-
-                originalImage.onload = function() {
-                    // Tampilkan Gambar Original
-                    const imgPreview = document.getElementById('imgOriginal');
-                    imgPreview.src = originalImage.src;
-                    imgPreview.style.display = 'block';
-                    document.getElementById('emptyOriginal').style.display = 'none';
-
-                    // Tampilkan Statistik Awal
-                    const sizeKB = (file.size / 1024).toFixed(2);
-                    document.getElementById('statsOriginal').innerText = `Size: ${sizeKB} KB | Dimensi: ${originalImage.width}x${originalImage.height}`;
-
-                    // Reset Hasil Sebelumnya
-                    resetResult();
-                }
-            }
-            reader.readAsDataURL(file);
-        }
-
-        function resetResult() {
-            document.getElementById('imgResult').style.display = 'none';
-            document.getElementById('emptyResult').style.display = 'block';
-            document.getElementById('statsResult').innerText = 'Size: - | Dimensi: -';
-            document.getElementById('savingsBadge').style.display = 'none';
-            btnDownload.classList.add('disabled');
-        }
-
-        // --- LOGIKA MULTIMEDIA (CORE SYSTEM) ---
-        function processImage() {
-            if (!originalImage) {
-                alert('Silakan upload gambar terlebih dahulu!');
-                return;
-            }
-
-            // 1. Ambil Parameter dari UI
-            const quality = parseInt(rangeQuality.value) / 100; // 0.1 - 1.0
-            const scale = parseInt(rangeScale.value) / 100;     // 0.1 - 1.0
-            const isGrayscale = checkGray.checked;
-
-            // 2. Hitung Dimensi Baru (Spatial Resolution Reduction)
-            const targetWidth = Math.round(originalImage.width * scale);
-            const targetHeight = Math.round(originalImage.height * scale);
-
-            // 3. Buat Canvas (Memori Pengolahan Citra)
-            const canvas = document.createElement('canvas');
-            canvas.width = targetWidth;
-            canvas.height = targetHeight;
-            const ctx = canvas.getContext('2d');
-
-            // 4. Gambar ke Canvas (Resizing terjadi di sini)
-            // ctx.drawImage(source, x, y, width, height)
-            ctx.drawImage(originalImage, 0, 0, targetWidth, targetHeight);
-
-            // 5. Logika Grayscale (Manipulasi Pixel Manual)
-            // Membuktikan pemahaman konsep multimedia tanpa library
-            if (isGrayscale) {
-                const imageData = ctx.getImageData(0, 0, targetWidth, targetHeight);
-                const data = imageData.data; // Array pixel [r, g, b, a, r, g, b, a, ...]
-
-                for (let i = 0; i < data.length; i += 4) {
-                    const r = data[i];
-                    const g = data[i+1];
-                    const b = data[i+2];
-
-                    // Rumus Luminance (Persepsi Mata Manusia)
-                    // Y = 0.299R + 0.587G + 0.114B
-                    const gray = (0.299 * r) + (0.587 * g) + (0.114 * b);
-
-                    data[i] = gray;     // Red
-                    data[i+1] = gray;   // Green
-                    data[i+2] = gray;   // Blue
-                    // Alpha (data[i+3]) biarkan tetap
-                }
-                ctx.putImageData(imageData, 0, 0);
-            }
-
-            // 6. Kompresi & Encoding (Lossy Compression)
-            // Mengubah canvas menjadi Data URL JPEG dengan kualitas tertentu
-            const resultDataUrl = canvas.toDataURL('image/jpeg', quality);
-
-            // --- OUTPUT HASIL ---
-            const imgResult = document.getElementById('imgResult');
-            imgResult.src = resultDataUrl;
-            imgResult.style.display = 'block';
-            document.getElementById('emptyResult').style.display = 'none';
-
-            // 7. Hitung Ukuran File Hasil (Estimasi dari Base64)
-            // Rumus: (Panjang String - Header) * 0.75
-            const head = 'data:image/jpeg;base64,';
-            const sizeBytes = Math.round((resultDataUrl.length - head.length) * 0.75);
-            const sizeKB = (sizeBytes / 1024).toFixed(2);
-
-            // Hitung Penghematan
-            const originalSizeEstimate = (document.getElementById('imgOriginal').src.length - head.length) * 0.75;
-            const savings = ((originalSizeEstimate - sizeBytes) / originalSizeEstimate) * 100;
-
-            // Tampilkan Data
-            document.getElementById('statsResult').innerText = `Size: ${sizeKB} KB | Dimensi: ${targetWidth}x${targetHeight}`;
-            
-            // Badge Hemat
-            const badge = document.getElementById('savingsBadge');
-            if (savings > 0) {
-                badge.innerText = `Hemat ${savings.toFixed(1)}%`;
-                badge.style.display = 'block';
-                badge.style.background = '#2ecc71'; // Hijau
-            } else {
-                badge.innerText = `Lebih Besar`;
-                badge.style.display = 'block';
-                badge.style.background = '#e74c3c'; // Merah
-            }
-
-            // Aktifkan Tombol Download
-            btnDownload.href = resultDataUrl;
-            btnDownload.download = `CitraRed_Result_${new Date().getTime()}.jpg`;
-            btnDownload.classList.remove('disabled');
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
